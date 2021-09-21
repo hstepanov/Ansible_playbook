@@ -1,7 +1,7 @@
 ---
 - name: Install default mariadb server
   hosts: dbservers
-  become: yes
+  become: true
 
   tasks:
     - name: Install software-properties-common
@@ -19,8 +19,8 @@
 
     - name: Update packages
       apt:
-        update_cache: yes
-        upgrade: yes
+        update_cache: true
+        upgrade: true
 
     - name: Install mariadb-server
       apt:
@@ -28,9 +28,9 @@
         state: present
 
     - name: Install MariaDB Client 10.3
-      apt: 
-       name: mariadb-client
-       state: present
+      apt:
+        name: mariadb-client
+        state: present
 
     - name: Enabled on boot
       service:
@@ -59,7 +59,7 @@
         user: root
         host: "{{ ansible_fqdn }}"
         state: absent
- 
+
     - name: Restart MariaDB 10.3
       service:
         name: mysql
